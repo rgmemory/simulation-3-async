@@ -1,0 +1,31 @@
+.profile-top{
+    border: solid black 1px;
+    height: 90px;
+}
+
+.profile-bottom{
+    border: solid black 1px;
+    height: 400px;
+}
+
+.profile-inner-bottom{
+    border: solid black 1px;
+    width: 500px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+}
+
+.profile-inner-bottom-left{
+    border: solid blue 1px;
+    width: 50%;
+    /* width: 500px;
+    margin: auto; */
+}
+
+.profile-inner-bottom-right{
+    border: solid red 1px;
+    width: 50%;
+    /* width: 500px;
+    margin: auto; */
+}

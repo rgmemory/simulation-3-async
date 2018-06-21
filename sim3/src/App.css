@@ -1,0 +1,10 @@
+.app{
+    box-sizing: border-box;
+}
+
+.center{
+    border: solid black 1px;
+    width: 700px;
+    margin: auto;
+    min-height: 100vh;
+}

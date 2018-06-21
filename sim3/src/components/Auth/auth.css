@@ -1,0 +1,25 @@
+.auth{
+    background-color: lightpink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+}
+
+.auth-login{
+    border: solid 1px black;
+    width: 300px;
+    height: 300px;
+}
+
+.auth-login-logo{
+    border: solid 1px black;
+}
+
+.auth-login-title{
+    border: solid 1px black;
+}
+
+.auth-login-button{
+    border: solid 1px black;
+}
