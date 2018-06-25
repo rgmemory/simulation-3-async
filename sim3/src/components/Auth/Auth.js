@@ -20,7 +20,8 @@ export default class Auth extends Component{
                         Helo
                     </div>
                     <div className="auth-login-button">
-                        <Link to="/dashboard"><button>Login/Register</button></Link>
+                        {/* <Link to="/"><button>Login/Register</button></Link> */}
+                        <a href={process.env.REACT_APP_LOGIN}>LOGIN</a>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,17 @@
+.dashboard-top{
+    border: solid 1px black;
+    display: flex;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+.dashboard-top-left{
+    border: solid 1px black;
+}
+.dashboard-top-right{
+    border: solid 1px black;
+}
+.dashboard-bottom{
+    border: solid 1px black;
+    height: 200px;
+}

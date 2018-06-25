@@ -1,8 +1,37 @@
 .search-top{
-    height: 200px;
+    height: 100px;
     border: solid black 1px;
 }
 .search-bottom{
-    height: 200px;
+    height: 500px;
     border: solid black 1px;
+}
+
+.search-user{
+    display: flex;
+    flex-direction: row;
+    border: solid black 1px;
+}
+
+.search-user-left{
+    border: solid black 1px;
+    height: 100px;
+    width: 100px;
+}
+.search-user-left img{
+    border: solid black 1px;
+    height: 100px;
+    width: 100px;
+}
+
+.search-user-center{
+    border: solid black 1px;
+    height: 100px;
+    width: 100px;
+}
+
+.search-user-middle{
+    border: solid black 1px;
+    height: 100px;
+    width: 100px;
 }

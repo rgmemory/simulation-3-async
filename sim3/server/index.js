@@ -1,19 +1,40 @@
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
 const controller = require('./controller')
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
+const session = require('express-session')
 require('dotenv').config();
 
 let {
     // SERVER_PORT,
     SESSION_SECRET,
+    CONNECTION_STRING,
     DOMAIN,
     CLIENT_ID,
     CLIENT_SECRET,
-    CALLBACK_URL,
-    CONNECTION_STRING,
+    CALLBACK_URL
 } = process.env
 
 const app = express();
@@ -34,9 +55,12 @@ app.use(session({
     saveUninitialized: true
 }))
 
+//play nice with session and passport
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// THESE ARE THE KEYS TO GET INTO AUTHO 0, WHICH ACCOUNT DO WE CONNECT TO
 passport.use(new Auth0Strategy({
     domain: DOMAIN,
     clientID: CLIENT_ID,
@@ -45,11 +69,10 @@ passport.use(new Auth0Strategy({
     //when auth0 authenicates it goes to wherever is listed here
     callbackURL: CALLBACK_URL,
     //if we want to put specific stragegies you put them here
-    scope: 'openid profile'
-    //function that gets invoked when somebody succesfuly authenticaes
+    scope: 'open email'
+    //function that gets invoked when somebody succesfuly authenticaes, WHATS NEXT
 }, function(accessToken, refreshToken, extraParams, profile, done){
     
-    // let db = app.get('db');
 
     //this is what we get back from google
     console.log(profile)
@@ -60,7 +83,7 @@ passport.use(new Auth0Strategy({
         if(foundUser[0]){            
             done(null, foundUser[0].id)///2nd param here is the id in serialize user below
         }else{
-            app.get('db').create_user([id, name.givenName, nickname]).then(user => {
+            app.get('db').create_user([id]).then(user => {
                 done(null, user[0].id)
             }).catch(e => console.log("error is", e)) 
         }
@@ -72,6 +95,8 @@ passport.use(new Auth0Strategy({
 
 
 
+
+///serialize allows you to control what you put on the cookie
 ///SERIALIZE
 //takes a profile and puts it on the session object
 //gives a user a serial number rather than storing an object on session
@@ -82,7 +107,8 @@ passport.use(new Auth0Strategy({
 passport.serializeUser(function(id, done){
 
     //id here coresponds to id below
-    done(null, id)
+    done(null, id)/////TAKE THIS COOKIE AND PUT IT ON THE SESSION you only need the id
+                            //to keep the cookie as small as possible and uniquely identifiable
 })
 
 
@@ -100,7 +126,7 @@ passport.deserializeUser(function(id, done){
     // app.get('db')///grab everything from db that matches this id////////////////////////////////////////////
     app.get('db').find_user([id]).then(user => {
         ///puts the user object on req.user
-        //the 2nd argument will be the user on req.user
+        //the 2nd argument will be the user on req.user normally it would be req.user.passport.user but they shortened it to req.user
         done(null, user[0]); 
     })
 })
@@ -144,7 +170,8 @@ app.get('/auth/me', function(req, res){
 
 
 
-////AUTHORIZATION ENDPOINTS
+
+
 //auth0 authentication
 app.get('/api/auth/login', controller.test)
 
@@ -158,24 +185,36 @@ app.get('/api/auth/authenticated', controller.test)
 app.post('/api/auth/logout', controller.test)
 
 
-//////FRIEND ENDPOINTS
+
+
+
+
 //list all friends
 app.get('/api/friend/list', controller.test)
 
 //add a friend
-app.post('/api/friend/add', controller.test)
+app.post('/api/friend/add', controller.addFriend)
 
 //remove a friend
 app.post('/api/friend/remove', controller.test)
 
 
-//////USER ENDPOINTS
+
+
+
+
+
 //update user attributes
 app.patch('/api/user/patch/:id', controller.test)
 
-//
+//get users
+app.get('/api/user/list', controller.getUsers)
 
-/////RECOMMENDED ENDPOINTS
+
+
+
+
+
 
 
 ///get auth0 setup and also get routing setup

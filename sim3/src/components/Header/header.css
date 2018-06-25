@@ -1,4 +1,51 @@
 .header{
-    background-color: lightpink;
+    background-color: #FD8973;
     height: 80px;
+    color: white;
+    box-sizing: border-box;
 }
+
+/* .header button{
+    background-color: Transparent;
+    outline: none;
+    border: none;
+    border: solid black 1px;
+    height: 100%;
+    
+    width: 80px;
+    color: white;
+} */
+
+.inner-header{
+    border: solid black 1px;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px green;
+}
+
+.current-page{
+
+}
+
+.inner-header-left{
+    height: 100%;
+    border: solid black 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    /* padding-right: 10px; */
+    width: 250px;
+}
+
+.inner-header-left button{
+    height: 100%;
+    border: black solid 1px;
+}
+

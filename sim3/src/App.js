@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header/Header'
 import routes from './routes'
 import './App.css';
+import {withRouter} from 'react-router';
 
 
 class App extends Component {
@@ -9,12 +10,21 @@ class App extends Component {
     return (
       <div className="App">
 
+      {/* {
+        this.props.location.pathname == '/auth' ?
+        null
+        :
+        <Header />
+      
+      } */}
+
       <Header />
         
-
-        <div className="center">
-          {routes}
-        </div>
+          <div className="background">
+            <div className="center">
+              {routes}
+            </div>
+          </div>
       </div>
     );
   }

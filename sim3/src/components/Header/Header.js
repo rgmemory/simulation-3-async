@@ -11,11 +11,20 @@ export default class Header extends Component{
     render(){
         return(
             <div className="header">
-                Helo
-                <Link to="/"><button>Home</button></Link>
-                <Link to="/search"><button>Search</button></Link>
-                Current Page
-                <Link to="/auth"><button>Logout</button></Link>
+                <div className="inner-header">
+                
+                    <div className="inner-header-left">
+                        <p>Helo</p>
+                        <Link to="/"><button>Home</button></Link>
+                        <Link to="/search"><button>Search</button></Link>
+                    </div>
+
+                    <div className="current-page">Current Page</div>
+
+                    <div className="inner-header-right">
+                        <Link to="/auth"><button>Logout</button></Link>
+                    </div>
+                </div>
             </div>
         )
     }
