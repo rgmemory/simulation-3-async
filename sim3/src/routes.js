@@ -8,8 +8,8 @@ import Search from './components/Search/Search';
 
 export default(
     <Switch>
-        <Route exact path='/' component={Dashboard}/>
-        <Route path='/auth' component={Auth} />
+        <Route exact path='/' component={Auth} />
+        <Route path='/dashboard' component={Dashboard}/>
         <Route path='/profile' component={Profile} />
         <Route path='/search' component={Search} />
     </Switch>

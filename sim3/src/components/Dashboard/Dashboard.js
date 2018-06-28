@@ -16,7 +16,9 @@ export default class Dashboard extends Component{
             hobby: '', 
             day: null,
             month: '',
-            year: null
+            year: null,
+            users: [],
+            user: []
         }
 
 
@@ -29,25 +31,26 @@ export default class Dashboard extends Component{
         this.handleDay = this.handleDay.bind(this)
         this.handleMonth = this.handleMonth.bind(this)
         this.handleYear = this.handleYear.bind(this)
-        this.getUsers = this.getUsers.bind(this)
-
+        this.addFriend = this.addFriend.bind(this)
     }
 
     componentDidMount(){
-        this.getUsers();
-    }
-
-
-    getUsers(){
-        console.log('get users clicked')
-        axios.get('/api/getUsers').then(res => {
-            console.log(res.data)
+        axios.get('/api/getDashboard').then(res => {
+            // console.log(res.data, 'response')
+            this.setState({
+                users: res.data
+            })            
         })
+
+        axios.get('api/getDashUser').then(user => {
+            // console.log('user', user)
+            this.setState({
+                user: user.data
+            })
+            // console.log('this.state.user', this.state.user)
+        })       
+        
     }
-
-
-
-
 
     handleFirst(value){
         this.setState({
@@ -98,42 +101,98 @@ export default class Dashboard extends Component{
         })
     }
 
-    
+    addFriend(value){
+        console.log('add clicked')
+        axios.post('/api/addFriend', {id: value}).then(res => {
+            console.log('res is', res)
+
+            axios.get('/api/getDashboard').then(res => {
+                this.setState({
+                    users: res.data
+                })            
+            })
+        })
+    }
 
     render(){
+        
+        let dashboardUsers = this.state.users.map((current, index) => {
+            return(
+                <div key={current + index} className="dashboard-user">
+                    <div className="dashboard-user-left">
+                        <img src={current.image} />
+                    </div>
+                    <div className="dashboard-user-center">
+                        <div><b>{current.first}</b></div>
+                        <div><b>{current.last}</b></div>
+                    </div>
+                    <div className="dashboard-user-right">
+                        <div className="add-friend">
+                            <button onClick={() => {this.addFriend(current.id)}}>Add Friend</button>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+
         return(
             <div className="dashboard">
 
-                Dashboard
+                
                 <div className="dashboard-top">
+
                     <div className="dashboard-top-left">
-                        <img/>
-                        <Link to="/profile"><button>Edit Profile</button></Link>
+
+                        <div className="dashboard-top-left-image">
+                            <img src={this.state.user.image}/>
+                        </div>
+
+                        <div className="dashboard-top-left-name-button">
+                            <div className="dashboard-name">
+                                <div><b>{this.state.user.first}</b></div>
+                                <div><b>{this.state.user.last}</b></div>
+                            </div>
+                            <div className="dashboard-edit-button">
+                                <Link to="/profile"><button>Edit Profile</button></Link>
+                            </div>
+                        </div>
+
                     </div>
+
                     <div className="dashboard-top-right">
-                        <p>
+                        <div>
                             Welcome to Helo! Find recommended friends based on your similarities, and even search for them by name. The more you update your
                             profile, the better recommendations we can make!
-                        </p>
+                        </div>
                     </div>
                 </div>
 
                 <div className="dashboard-bottom">
                     <div className="dashboard-bottom-top">
-                        <p>Recommended Friends</p>
-                        <p>Sorted by</p>
-                        <select>
-                            <option value={this.state.first} onChange={e => this.handleFirst(e.target.value)}>First Name</option>
-                            <option value={this.state.last} onChange={e => this.handleLast(e.target.value)}>Last Name</option>
-                            <option value={this.state.gender} onChange={e => this.handleGender(e.target.value)}>Gender</option>
-                            <option value={this.state.hair} onChange={e => this.handleHair(e.target.value)}>Hair Color</option>
-                            <option value={this.state.eye} onChange={e => this.handleEye(e.target.value)}>Eye Color</option>
-                            <option value={this.state.hobby} onChange={e => this.handleHobby(e.target.value)}>Hobby</option>
-                            <option value={this.state.day} onChange={e => this.handleDay(e.target.value)}>Birth Day</option>
-                            <option value={this.state.month} onChange={e => this.handleMonth(e.target.value)}>Birth Month</option>
-                            <option value={this.state.year} onChange={e => this.handleYear(e.target.value)}>Birth Year</option>
-                            
-                        </select>
+                        <div className="dashboard-recommended">
+                                <p>Recommended Friends</p>
+                            <div className="dashboard-right">
+                                <p>Sorted by</p>
+
+                                    <select>
+                                        <option value={this.state.first} onChange={e => this.handleFirst(e.target.value)}>First Name</option>
+                                        <option value={this.state.last} onChange={e => this.handleLast(e.target.value)}>Last Name</option>
+                                        <option value={this.state.gender} onChange={e => this.handleGender(e.target.value)}>Gender</option>
+                                        <option value={this.state.hair} onChange={e => this.handleHair(e.target.value)}>Hair Color</option>
+                                        <option value={this.state.eye} onChange={e => this.handleEye(e.target.value)}>Eye Color</option>
+                                        <option value={this.state.hobby} onChange={e => this.handleHobby(e.target.value)}>Hobby</option>
+                                        <option value={this.state.day} onChange={e => this.handleDay(e.target.value)}>Birth Day</option>
+                                        <option value={this.state.month} onChange={e => this.handleMonth(e.target.value)}>Birth Month</option>
+                                        <option value={this.state.year} onChange={e => this.handleYear(e.target.value)}>Birth Year</option>
+                                        
+                                    </select>
+                            </div>
+                        </div>
+                        
+                        
+                        
+
+                        {dashboardUsers}
                     </div>
                 </div>
             </div>

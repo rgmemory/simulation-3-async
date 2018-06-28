@@ -1,6 +1,22 @@
-.background{
+.auth-background{
     /* background-color: #F2F2F2; */
-    background-color: lightblue;
+    /* background-color: lightblue; */
+    background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70);
+}
+
+.background{
+    background-color: #F2F2F2;
+}
+
+.auth-center{
+    background-color: green;
+}
+
+.center{
+    width: 700px;
+    margin: auto;
+    height: 100vh;
+    background-color: #F2F2F2;
 }
 
 .app{
@@ -8,12 +24,8 @@
     background-color: lightblue;
 }
 
-.center{
-    border: solid black 1px;
-    width: 700px;
-    margin: auto;
-    min-height: 100vh;
-    background-color: lightgoldenrodyellow;
-    /* margin-top: 20px; */
-    /* margin-top: 10px; */
+
+select{
+    background-color: fff;
+
 }

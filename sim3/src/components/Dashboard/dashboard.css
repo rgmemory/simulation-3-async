@@ -1,17 +1,136 @@
 .dashboard-top{
-    border: solid 1px black;
+    /* border: solid 1px black; */
     display: flex;
     height: 100px;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 }
 .dashboard-top-left{
-    border: solid 1px black;
+    /* border: solid 1px black; */
+    background-color: white;
+    width: 30%;
+    margin-right: 15px;
+    padding: 7px;
+    display: flex;
+    box-shadow: 1px 1px 1px 1px #ccc;
 }
+
+.dashboard-top-left-name-button{
+    /* border: green solid 1px; */
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.dashboard-name{
+    /* border: solid red 1px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-edit-button button{
+    margin-top: 8px;
+    background-color: #F5F3F2;
+    width: 100px;
+    height: 25px;
+}
+
+.dashboard-top-left-image img{
+    height: 80px;
+    width: 80px;
+    border: 2px solid #FE9773;
+}
+                                               
 .dashboard-top-right{
-    border: solid 1px black;
+    /* border: solid 1px black; */
+    background-color: white;
+    width: 70%;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    padding: 10px;
 }
+
 .dashboard-bottom{
-    border: solid 1px black;
-    height: 200px;
+    /* border: solid 1px black; */
+    height: 550px;
+    margin-top: 15px;
+    background-color: white;
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 8px;
+    box-shadow: 1px 1px 1px 1px #ccc;
 }
+
+.dashboard-bottom-top{
+    min-height: 100vh;
+    /* border: solid black 1px; */
+}
+
+.dashboard-user{
+    display: flex;
+    flex-direction: row;
+    /* border: solid green 1px; */
+    width: 50%;
+    height: 90px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    margin: 9px;
+}
+
+.dashboard-user-left{
+    /* border: solid black 1px; */
+    height: 100%;
+    width: 100px;
+}
+.dashboard-user-left img{
+    /* border: solid black 1px; */
+    height: 100%;
+    width: 100px;
+}
+
+.dashboard-user-center{
+    /* border: solid black 1px; */
+    height: 100%;
+    width: 100px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-user-middle{
+    /* border: solid black 1px; */
+    height: 100%;
+    width: 100px;
+}
+
+.dashboard-user-right{
+    height: 100%;
+    width: 100px;
+    display: flex;
+}
+
+.dashboard-user-right .add-friend{
+    display: flex;
+    padding-left: 45px;
+    align-items: center;
+}
+
+.dashboard-user-right .add-friend button{
+    background-color: #FC8271;
+    color: white;
+    height: 30px;
+    width: 90px;
+}
+
+.dashboard-recommended{
+    /* border: solid pink 3px; */
+    display: flex;
+    justify-content: space-between
+}
+
+.dashboard-right{
+    display: flex;
+    align-items: center;
+}
+
+

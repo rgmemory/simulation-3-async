@@ -1,23 +1,3 @@
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const massive = require('massive');
@@ -27,8 +7,10 @@ const Auth0Strategy = require('passport-auth0');
 const session = require('express-session')
 require('dotenv').config();
 
+//helousers
+//helojunction
+
 let {
-    // SERVER_PORT,
     SESSION_SECRET,
     CONNECTION_STRING,
     DOMAIN,
@@ -41,123 +23,101 @@ const app = express();
 
 app.use(bodyParser.json());
 
+//SCROLL TO THE BOTTOM, ADVANCED SETTINGS,
+//OAUTH, THE OIDC CONFORMANT
+
 massive(CONNECTION_STRING).then(db => {
     console.log('db works');
-    ///storing information in a server object. first value is the key, 2nd is the value. app.get is how you get it
     app.set('db', db);
-}).catch(e => console.log(e))
+})
 
-
-//order is important
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true
 }))
 
-//play nice with session and passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// THESE ARE THE KEYS TO GET INTO AUTHO 0, WHICH ACCOUNT DO WE CONNECT TO
 passport.use(new Auth0Strategy({
     domain: DOMAIN,
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
-    //url you send back to app after logging in//DON'T FORGET TO ADD the callback URL in account
-    //when auth0 authenicates it goes to wherever is listed here
     callbackURL: CALLBACK_URL,
-    //if we want to put specific stragegies you put them here
-    scope: 'open email'
-    //function that gets invoked when somebody succesfuly authenticaes, WHATS NEXT
+    scope: 'openid profile email'
 }, function(accessToken, refreshToken, extraParams, profile, done){
-    
-
-    //this is what we get back from google
-    console.log(profile)
-    let {id, name, nickname} = profile;
-
-
-    app.get('db').find_user([id]).then(foundUser => {
-        if(foundUser[0]){            
-            done(null, foundUser[0].id)///2nd param here is the id in serialize user below
+    console.log(profile);
+    app.get('db').check_user([profile.id]).then(user => {
+        if(user[0]){      
+            console.log('user already there')      
+            done(null, user[0])
         }else{
-            app.get('db').create_user([id]).then(user => {
-                done(null, user[0].id)
-            }).catch(e => console.log("error is", e)) 
+            console.log('user not there')
+            app.get('db').register_user([profile.id, profile.name.givenName, profile.name.familyName, `https://robohash.org/me/${profile.id}`]).then(user => {
+                console.log("user", user[0])
+                done(null, user[0])
+                
+            }) 
         }
-    }).catch(e => console.log("error is", e))    
+    })    
 }))
 
-//SCROLL TO THE BOTTOM, ADVANCED SETTINGS,
-//OAUTH, THE OIDC CONFORMANT
-
-
-
-
-///serialize allows you to control what you put on the cookie
-///SERIALIZE
-//takes a profile and puts it on the session object
-//gives a user a serial number rather than storing an object on session
-
-
-//this fires immediately to file away user
-//this puts the id in the session store
-passport.serializeUser(function(id, done){
-
-    //id here coresponds to id below
-    done(null, id)/////TAKE THIS COOKIE AND PUT IT ON THE SESSION you only need the id
-                            //to keep the cookie as small as possible and uniquely identifiable
+//create the cookie here
+passport.serializeUser(function(user, done){
+    console.log('serialize', user)
+    done(null, user.id)
 })
 
-
-//DESERIALIZE
-//runs as middleware after somebody has logged in. It will get whatever was put in the store
-//by serializeUser (the user)
-///this is called always when a user is logged in
-
-//this is called when user object access is needed
 passport.deserializeUser(function(id, done){  
-
-    //whatever we pass out, eneds up on the req object as req.user.
-    //req.user is how we get all the users info like their name etc
-    console.log("deserialize")
-    // app.get('db')///grab everything from db that matches this id////////////////////////////////////////////
-    app.get('db').find_user([id]).then(user => {
-        ///puts the user object on req.user
-        //the 2nd argument will be the user on req.user normally it would be req.user.passport.user but they shortened it to req.user
-        done(null, user[0]); 
+    console.log('deserialize', id)
+    app.get('db').read_user([id]).then(user => {
+        done(null, user); 
     })
 })
 
-
-app.get('/login', passport.authenticate('auth0'))
-
-app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000',
-    failureRedirect: 'http://www.google.com'
+app.get('/login', passport.authenticate('auth0', {
+    successRedirect: 'http://localhost:3000/#/dashboard',
+    failureRedirect: 'http://localhost:3000/#/auth'
 }))
-///////////////
 
 
-//put this axios call on the app.js and the .then respons will update the redux store
-///fire this function in app.js  componentdid mount to check the current user when the app loads then get user 
-//check to see who is currently logged in
 app.get('/auth/me', function(req, res){
-    console.log("auth/me")
-
     if(req.user){
-        req.app.get('db').get_all_data().then(user => {
-            // res.status(200).send(req.user)
-            res.status(200).send(user)
-        })
-        
-        
+        // req.app.get('db').get_all_data().then(user => {
+            res.status(200).send(req.user)
+        // })
     }else{
         res.status(401).send('nice try sucka')
     }
 })
+
+app.get('/api/auth/logout', controller.logout)
+
+
+
+
+app.get('/api/getDashboard', controller.getDashboard)
+
+app.get('/api/getDashUser', controller.getDashUser)
+
+app.post('/api/updateProfile', controller.updateProfile)
+
+app.post('/api/addFriend', controller.addFriend)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -173,16 +133,17 @@ app.get('/auth/me', function(req, res){
 
 
 //auth0 authentication
-app.get('/api/auth/login', controller.test)
+// app.get('/api/auth/login', controller.test)
 
 //set the information on the session
-app.get('/api/auth/setUser', controller.test)
+// app.get('/api/auth/setUser', controller.test)
 
 //check for the user object on session
-app.get('/api/auth/authenticated', controller.test)
+// app.get('/api/auth/authenticated', controller.test)
 
 //logout
-app.post('/api/auth/logout', controller.test)
+// app.post('/api/auth/logout', controller.test)
+
 
 
 
@@ -190,13 +151,13 @@ app.post('/api/auth/logout', controller.test)
 
 
 //list all friends
-app.get('/api/friend/list', controller.test)
+// app.get('/api/friend/list', controller.test)
 
 //add a friend
 app.post('/api/friend/add', controller.addFriend)
 
 //remove a friend
-app.post('/api/friend/remove', controller.test)
+// app.post('/api/friend/remove', controller.test)
 
 
 
@@ -205,7 +166,7 @@ app.post('/api/friend/remove', controller.test)
 
 
 //update user attributes
-app.patch('/api/user/patch/:id', controller.test)
+// app.patch('/api/user/patch/:id', controller.test)
 
 //get users
 app.get('/api/user/list', controller.getUsers)

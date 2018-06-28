@@ -5,10 +5,15 @@ import './App.css';
 import {withRouter} from 'react-router';
 
 
+//how to make the dashboard rerender when you add a friend so that friend is no longer recommened
+
 class App extends Component {
   render() {
+    console.log(this.props)
     return (
       <div className="App">
+
+      
 
       {/* {
         this.props.location.pathname == '/auth' ?
@@ -20,8 +25,10 @@ class App extends Component {
 
       <Header />
         
-          <div className="background">
+          {/* <div className="background"> */}
+          <div className={`${this.props.location.pathname === '/' ? 'auth-background' : 'background'}`}>
             <div className="center">
+            {/* <div className={`${this.props.location.pathname === '/' ? 'auth-center' : 'center'}`}> */}
               {routes}
             </div>
           </div>
@@ -30,4 +37,6 @@ class App extends Component {
   }
 }
 
-export default App;
+
+///withrouter wraps the router but if it's not in the router you need to export it like so:
+export default withRouter(App);

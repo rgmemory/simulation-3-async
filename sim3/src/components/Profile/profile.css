@@ -1,30 +1,102 @@
 .profile-top{
-    border: solid black 1px;
-    height: 90px;
+    /* border: solid black 2px; */
+    height: 110px;
+    background-color: white;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
+    box-sizing: border-box;
+    /* margin-top: 10px; */
 }
 
 .profile-bottom{
-    border: solid black 1px;
-    height: 400px;
+    /* border: solid black 1px; */
+    background-color: white;
+    height: 300px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+}
+
+.profile-top-left{
+    /* border: solid red 2px; */
+    width: 30%;
+    display: flex;
+}
+
+.profile-top-image img{
+    height: 90px;
+    width: 90px;
+    border: 2px solid #FE9773;
+}
+
+.profile-top-name{
+  
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    width: 100px;
+    /* border: 2px solid #FE9773; */
+    padding-left: 6px;
+}
+
+
+.profile-top-right{
+    /* border: solid green 1px; */
+    width: 28%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.profile-update button{
+    background-color: #4D4C4A;
+    color: white;
+    width: 85px;
+    height: 25px;
+}
+.profile-cancel button{
+    background-color: #F4EFEF;
+    color: black;
+    width: 85px;
+    height: 25px;
 }
 
 .profile-inner-bottom{
-    border: solid black 1px;
+    /* border: solid black 1px; */
     width: 500px;
     height: 100%;
     margin: auto;
     display: flex;
 }
 
+.profile-inner-bottom div{
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
 .profile-inner-bottom-left{
-    border: solid blue 1px;
+    /* border: solid blue 1px; */
     width: 50%;
+    
     /* width: 500px;
     margin: auto; */
 }
 
+.profile-inner-bottom-left input{
+    /* border: solid blue 1px; */
+    height: 20px;
+    width: 50%;
+    border: solid 1px #FFD2C3;
+    /* width: 500px;
+    margin: auto; */
+}
+
+
 .profile-inner-bottom-right{
-    border: solid red 1px;
+    /* border: solid red 1px; */
     width: 50%;
     /* width: 500px;
     margin: auto; */

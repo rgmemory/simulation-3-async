@@ -1,37 +1,80 @@
 .search-top{
-    height: 100px;
-    border: solid black 1px;
+    height: 80px;
+    /* border: solid black 1px; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* padding-right: 20px; */
+}
+
+.search-top div{
+    margin-left: 10px;
 }
 .search-bottom{
     height: 500px;
-    border: solid black 1px;
+    /* border: solid black 1px; */
 }
 
 .search-user{
     display: flex;
     flex-direction: row;
-    border: solid black 1px;
+    /* border: solid green 1px; */
+    width: 50%;
+    height: 90px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    margin: 9px;
+    background-color: white;
 }
 
 .search-user-left{
-    border: solid black 1px;
-    height: 100px;
+    /* border: solid red 1px; */
+    /* border: solid black 1px; */
+    height: 100%;
     width: 100px;
 }
 .search-user-left img{
-    border: solid black 1px;
-    height: 100px;
+    /* border: solid black 2px; */
+    height: 100%;
     width: 100px;
 }
 
 .search-user-center{
-    border: solid black 1px;
-    height: 100px;
+    /* border: solid green 2px; */
+    height: 100%;
     width: 100px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
 }
 
-.search-user-middle{
+/* .search-user-middle{
     border: solid black 1px;
-    height: 100px;
+    height: 100%;
     width: 100px;
+} */
+
+.search-user-right{
+    /* border: solid pink 2px; */
+    height: 100%;
+    width: 100px;
+    display: flex;
+}
+
+.search-user-right .add-friend{
+    display: flex;
+    padding-left: 45px;
+    align-items: center;
+}
+
+.search-user-right .add-friend button{
+    background-color: #FC8271;
+    color: white;
+    height: 30px;
+    width: 90px;
+}
+
+.search-recommended{
+    /* border: solid pink 3px; */
+    display: flex;
+    justify-content: space-between
 }
