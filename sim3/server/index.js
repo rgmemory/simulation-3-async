@@ -94,6 +94,8 @@ app.get('/auth/me', function(req, res){
 
 app.get('/api/auth/logout', controller.logout)
 
+app.post('/api/dashboardSort', controller.dashboardSort)
+
 
 
 

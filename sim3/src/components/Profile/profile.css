@@ -1,7 +1,12 @@
+.profile{
+    background-color: #F2F2F2;
+}
+
 .profile-top{
     /* border: solid black 2px; */
     height: 110px;
     background-color: white;
+    margin-top: 15px;
     margin-bottom: 10px;
     box-shadow: 1px 1px 1px 1px #ccc;
     display: flex;

@@ -37,7 +37,7 @@ module.exports = {
 
     updateProfile: function(req, res){
         let {first, last, gender, hair, eye, hobby, day, month, year} = req.body
-        console.log(req.body, req.user[0].id)
+        console.log('uploaded info is', req.body, req.user[0].id)
         req.app.get('db').update_profile([req.user[0].id, first, last, gender, hair, eye, hobby, day, month, year])
     },
 
@@ -46,6 +46,16 @@ module.exports = {
 
         req.app.get('db').add_friend([req.user[0].id, req.body.id]).then(friend => {
             console.log(friend)
+            //////immediately call for list of friends here
+            req.app.get('db').dashboard_users([req.user[0].id]).then(dashboardUsers => {
+                res.status(200).send(dashboardUsers)
+            })
         })
+    },
+
+    dashboardSort: function(req, res){
+        let user = req.user[0]
+        console.log('backend dashboard sort', req.body.sort, req.user[0])
+
     }
 }

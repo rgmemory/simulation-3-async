@@ -1,17 +1,31 @@
+.search{
+    background-color: #F2F2F2;
+    box-shadow: 1px 1px 1px 1px #ccc;
+
+
+}
+
+
+
 .search-top{
+    margin-top: 15px;
     height: 80px;
+    background-color: white;
     /* border: solid black 1px; */
     display: flex;
     /* justify-content: center; */
     align-items: center;
     /* padding-right: 20px; */
+    /* box-shadow: 1px 1px 1px 1px #ccc; */
 }
 
 .search-top div{
     margin-left: 10px;
 }
 .search-bottom{
+    background-color: white;
     height: 500px;
+    /* box-shadow: 1px 1px 1px 1px #ccc; */
     /* border: solid black 1px; */
 }
 

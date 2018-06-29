@@ -100,9 +100,9 @@ export default class Profile extends Component{
     }
 
     update(){
-        console.log('update clicked')
-
+        
         let {first, last, gender, hair, eye, hobby, day, month, year} = this.state
+        console.log('update clicked', first, last, gender, hair, eye, hobby, day, month, year)
         // console.log('front end friend works', first, last, gender, hair, eye, hobby, day, month, year)
         axios.post('/api/updateProfile', {first, last, gender, hair, eye, hobby, day, month, year}).then(res => {
             console.log('new deets', res.data)
@@ -171,36 +171,36 @@ export default class Profile extends Component{
                             <input value={this.state.last} onChange={e => this.lastInput(e.target.value)} type="text"/>
                             
                             <div>Gender</div>
-                            <select name="gender" onChange={e => this.handleGender(e.target.value)}>
-                                <option value={this.state.gender} >Male</option>
-                                <option value={this.state.gender} >Female</option>
+                            <select name="gender" value={this.state.gender} onChange={e => this.handleGender(e.target.value)}>
+                                <option value="Male" >Male</option>
+                                <option value="Female" >Female</option>
                             </select>
 
                             <div>Hair Color</div>
-                            <select name="hair" onChange={e => this.handleHair(e.target.value)}>
-                                <option value={this.state.hair}>Brown</option>
-                                <option value={this.state.hair}>Blonde</option>
-                                <option value={this.state.hair}>Red</option>
-                                <option value={this.state.hair}>Black</option>
+                            <select name="hair" value={this.state.hair} onChange={e => this.handleHair(e.target.value)}>
+                                <option value="Brown">Brown</option>
+                                <option value='Blonde'>Blonde</option>
+                                <option value='Red'>Red</option>
+                                <option value='Black'>Black</option>
                             </select>
 
                             <div>Eye Color</div>
-                            <select name="eye" onChange={e => this.handleEye(e.target.value)}>
-                                <option value={this.state.eye}>Blue</option>
-                                <option value={this.state.eye}>Brown</option>
-                                <option value={this.state.eye}>Green</option>
-                                <option value={this.state.eye}>Hazel</option>
+                            <select name="eye" value={this.state.eye} onChange={e => this.handleEye(e.target.value)}>
+                                <option value='Blue'>Blue</option>
+                                <option value='Brown'>Brown</option>
+                                <option value='Green'>Green</option>
+                                <option value='Hazel'>Hazel</option>
                             </select>
 
                         </div>
                         <div className="profile-inner-bottom-right">
                             <div>Hobby</div>
-                            <select name="hobby" onChange={e => this.handleHobby(e.target.value)}>
-                                <option value={this.state.hobby}>Reading</option>
-                                <option value={this.state.hobby}>Biking</option>
-                                <option value={this.state.hobby}>Movies</option>
-                                <option value={this.state.hobby}>Video Games</option>
-                                <option value={this.state.hobby}>Instruments</option>
+                            <select name="hobby" value={this.state.hobby} onChange={e => this.handleHobby(e.target.value)}>
+                                <option value='Reading'>Reading</option>
+                                <option value='Biking'>Biking</option>
+                                <option value='Movies'>Movies</option>
+                                <option value='Video Games'>Video Games</option>
+                                <option value='Instruments'>Instruments</option>
                             </select>
 
 
@@ -210,19 +210,19 @@ export default class Profile extends Component{
                             </select>
 
                             <div>Birthday Month</div>
-                            <select name="month" onChange={e => this.handleMonth(e.target.value)}>
-                                <option value={this.state.month}>January</option>
-                                <option value={this.state.month}>February</option>
-                                <option value={this.state.month}>March</option>
-                                <option value={this.state.month}>April</option>
-                                <option value={this.state.month}>May</option>
-                                <option value={this.state.month}>June</option>
-                                <option value={this.state.month}>July</option>
-                                <option value={this.state.month}>August</option>
-                                <option value={this.state.month}>September</option>
-                                <option value={this.state.month}>October</option>
-                                <option value={this.state.month}>November</option>
-                                <option value={this.state.month}>December</option>
+                            <select name="month" value={this.state.month} onChange={e => this.handleMonth(e.target.value)}>
+                                <option value='January'>January</option>
+                                <option value='February'>February</option>
+                                <option value='March'>March</option>
+                                <option value='April'>April</option>
+                                <option value='May'>May</option>
+                                <option value='June'>June</option>
+                                <option value='July'>July</option>
+                                <option value='August'>August</option>
+                                <option value='September'>September</option>
+                                <option value='October'>October</option>
+                                <option value='November'>November</option>
+                                <option value='December'>December</option>
                             </select>
 
                             <div>Birthday Year</div>

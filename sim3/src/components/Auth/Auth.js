@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './auth.css'
 import {Link} from 'react-router-dom';
+import auth from './auth.png'
 
 export default class Auth extends Component{
     constructor(){
@@ -11,17 +12,16 @@ export default class Auth extends Component{
     render(){
         return(
             <div className="auth">
-            Auth
                 <div className="auth-login">
                     <div className="auth-login-logo">
-                        Logo
+                        <div><img src={auth} /></div>
                     </div>
                     <div className="auth-login-title">
-                        Helo
+                        <p>Helo</p>
                     </div>
                     <div className="auth-login-button">
                         {/* <Link to="/"><button>Login/Register</button></Link> */}
-                        <a href={process.env.REACT_APP_LOGIN}>LOGIN</a>
+                        <button><a href={process.env.REACT_APP_LOGIN}>LOGIN/REGISTER</a></button>
                     </div>
                 </div>
             </div>

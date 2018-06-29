@@ -1,3 +1,7 @@
+.dashboard{
+    background-color: #F2F2F2;
+}
+
 .dashboard-top{
     /* border: solid 1px black; */
     display: flex;

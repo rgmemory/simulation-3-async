@@ -6,32 +6,35 @@ import {withRouter} from 'react-router';
 
 
 //how to make the dashboard rerender when you add a friend so that friend is no longer recommened
+//how to get the dashboard to display conditionally when you don't have any friends to add and it says so
+//how does a select work? Does it take the literal value in value?
+//in order to filter on dahsboard
 
 class App extends Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div className="App">
+       
+          {/* <div className={`${this.props.location.pathname === '/' ? 'auth-background' : 'background'}`}> */}
+          
+            {
+              this.props.location.pathname === '/' ? 
 
-      
+                <div>
+                      {routes}
+                </div>
+                :
 
-      {/* {
-        this.props.location.pathname == '/auth' ?
-        null
-        :
-        <Header />
-      
-      } */}
-
-      <Header />
-        
-          {/* <div className="background"> */}
-          <div className={`${this.props.location.pathname === '/' ? 'auth-background' : 'background'}`}>
-            <div className="center">
-            {/* <div className={`${this.props.location.pathname === '/' ? 'auth-center' : 'center'}`}> */}
-              {routes}
-            </div>
-          </div>
+                <div>
+                  <Header />
+                  <div className="background">
+                    <div className="center">
+                          {routes}
+                    </div>
+                  </div>
+                </div>
+            }  
       </div>
     );
   }

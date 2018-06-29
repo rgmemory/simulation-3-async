@@ -1,15 +1,6 @@
-.auth-background{
-    /* background-color: #F2F2F2; */
-    /* background-color: lightblue; */
-    background-image: linear-gradient(99deg, #ff70a6, #ff9770 40%, #ffd670 73%, #e9ff70);
-}
 
 .background{
     background-color: #F2F2F2;
-}
-
-.auth-center{
-    background-color: green;
 }
 
 .center{
@@ -19,10 +10,10 @@
     background-color: #F2F2F2;
 }
 
-.app{
+/* .app{
     box-sizing: border-box;
     background-color: lightblue;
-}
+} */
 
 
 select{
