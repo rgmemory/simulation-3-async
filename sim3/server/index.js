@@ -47,15 +47,15 @@ passport.use(new Auth0Strategy({
     callbackURL: CALLBACK_URL,
     scope: 'openid profile email'
 }, function(accessToken, refreshToken, extraParams, profile, done){
-    console.log(profile);
+    // console.log(profile);
     app.get('db').check_user([profile.id]).then(user => {
         if(user[0]){      
-            console.log('user already there')      
+            // console.log('user already there')      
             done(null, user[0])
         }else{
-            console.log('user not there')
+            // console.log('user not there')
             app.get('db').register_user([profile.id, profile.name.givenName, profile.name.familyName, `https://robohash.org/me/${profile.id}`]).then(user => {
-                console.log("user", user[0])
+                // console.log("user", user[0])
                 done(null, user[0])
                 
             }) 
@@ -65,12 +65,12 @@ passport.use(new Auth0Strategy({
 
 //create the cookie here
 passport.serializeUser(function(user, done){
-    console.log('serialize', user)
+    // console.log('serialize', user)
     done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done){  
-    console.log('deserialize', id)
+    // console.log('deserialize', id)
     app.get('db').read_user([id]).then(user => {
         done(null, user); 
     })
@@ -107,6 +107,11 @@ app.post('/api/updateProfile', controller.updateProfile)
 
 app.post('/api/addFriend', controller.addFriend)
 
+app.post('/api/searchAddFriend', controller.searchAddFriend)
+
+app.post('/api/removeFriend', controller.removeFriend)
+
+app.get('/api/searchDisplay', controller.searchDisplay)
 
 
 
@@ -171,7 +176,6 @@ app.post('/api/friend/add', controller.addFriend)
 // app.patch('/api/user/patch/:id', controller.test)
 
 //get users
-app.get('/api/user/list', controller.getUsers)
 
 
 

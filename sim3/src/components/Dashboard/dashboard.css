@@ -137,4 +137,9 @@
     align-items: center;
 }
 
+.dashboard-no-recommendations{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 

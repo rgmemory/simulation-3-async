@@ -103,26 +103,18 @@ export default class Profile extends Component{
         
         let {first, last, gender, hair, eye, hobby, day, month, year} = this.state
         console.log('update clicked', first, last, gender, hair, eye, hobby, day, month, year)
-        // console.log('front end friend works', first, last, gender, hair, eye, hobby, day, month, year)
         axios.post('/api/updateProfile', {first, last, gender, hair, eye, hobby, day, month, year}).then(res => {
             console.log('new deets', res.data)
         })
     }
 
     cancel(){
-        console.log('cancel clicked')
-
         axios.get('api/getDashUser').then(user => {
-            console.log('user', user)
-
             let {first, last, gender, hair, eye, hobby, day, month, year, image} = user.data;
             this.setState({
                 first, last, gender, hair, eye, hobby, day, month, year, image
             })
-            console.log('this.state.first', this.state.first)
-            console.log('this.state.image', this.state.image)
         })
-
     }
 
     render(){
@@ -152,8 +144,6 @@ export default class Profile extends Component{
                             </div>
                         </div>
 
-                        
-
                         <div className="profile-top-right">
                         
                             <div className="profile-update"><Link to="/dashboard"><button onClick={this.update}>Update</button></Link></div>
@@ -172,35 +162,35 @@ export default class Profile extends Component{
                             
                             <div>Gender</div>
                             <select name="gender" value={this.state.gender} onChange={e => this.handleGender(e.target.value)}>
-                                <option value="Male" >Male</option>
-                                <option value="Female" >Female</option>
+                                <option value="male" >Male</option>
+                                <option value="female" >Female</option>
                             </select>
 
                             <div>Hair Color</div>
                             <select name="hair" value={this.state.hair} onChange={e => this.handleHair(e.target.value)}>
-                                <option value="Brown">Brown</option>
-                                <option value='Blonde'>Blonde</option>
-                                <option value='Red'>Red</option>
-                                <option value='Black'>Black</option>
+                                <option value="brown">Brown</option>
+                                <option value='blonde'>Blonde</option>
+                                <option value='red'>Red</option>
+                                <option value='black'>Black</option>
                             </select>
 
                             <div>Eye Color</div>
                             <select name="eye" value={this.state.eye} onChange={e => this.handleEye(e.target.value)}>
-                                <option value='Blue'>Blue</option>
-                                <option value='Brown'>Brown</option>
-                                <option value='Green'>Green</option>
-                                <option value='Hazel'>Hazel</option>
+                                <option value='blue'>Blue</option>
+                                <option value='brown'>Brown</option>
+                                <option value='green'>Green</option>
+                                <option value='hazel'>Hazel</option>
                             </select>
 
                         </div>
                         <div className="profile-inner-bottom-right">
                             <div>Hobby</div>
                             <select name="hobby" value={this.state.hobby} onChange={e => this.handleHobby(e.target.value)}>
-                                <option value='Reading'>Reading</option>
-                                <option value='Biking'>Biking</option>
-                                <option value='Movies'>Movies</option>
-                                <option value='Video Games'>Video Games</option>
-                                <option value='Instruments'>Instruments</option>
+                                <option value='reading'>Reading</option>
+                                <option value='biking'>Biking</option>
+                                <option value='movies'>Movies</option>
+                                <option value='video Games'>Video Games</option>
+                                <option value='instruments'>Instruments</option>
                             </select>
 
 
@@ -211,18 +201,18 @@ export default class Profile extends Component{
 
                             <div>Birthday Month</div>
                             <select name="month" value={this.state.month} onChange={e => this.handleMonth(e.target.value)}>
-                                <option value='January'>January</option>
-                                <option value='February'>February</option>
-                                <option value='March'>March</option>
-                                <option value='April'>April</option>
+                                <option value='fanuary'>January</option>
+                                <option value='february'>February</option>
+                                <option value='march'>March</option>
+                                <option value='april'>April</option>
                                 <option value='May'>May</option>
-                                <option value='June'>June</option>
-                                <option value='July'>July</option>
-                                <option value='August'>August</option>
-                                <option value='September'>September</option>
-                                <option value='October'>October</option>
-                                <option value='November'>November</option>
-                                <option value='December'>December</option>
+                                <option value='june'>June</option>
+                                <option value='july'>July</option>
+                                <option value='august'>August</option>
+                                <option value='september'>September</option>
+                                <option value='october'>October</option>
+                                <option value='november'>November</option>
+                                <option value='december'>December</option>
                             </select>
 
                             <div>Birthday Year</div>

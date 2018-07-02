@@ -84,7 +84,20 @@
     background-color: #FC8271;
     color: white;
     height: 30px;
-    width: 90px;
+    width: 100px;
+}
+
+.search-user-right .remove-friend{
+    display: flex;
+    padding-left: 45px;
+    align-items: center;
+}
+
+.search-user-right .remove-friend button{
+    background-color: #4E4C4A;
+    color: white;
+    height: 30px;
+    width: 100px;
 }
 
 .search-recommended{

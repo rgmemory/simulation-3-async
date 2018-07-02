@@ -5,8 +5,6 @@ import './App.css';
 import {withRouter} from 'react-router';
 
 
-//how to make the dashboard rerender when you add a friend so that friend is no longer recommened
-//how to get the dashboard to display conditionally when you don't have any friends to add and it says so
 //how does a select work? Does it take the literal value in value?
 //in order to filter on dahsboard
 

@@ -18,11 +18,19 @@ export default class Search extends Component{
         this.search = this.search.bind(this);
         this.reset = this.reset.bind(this);
         this.addFriend = this.addFriend.bind(this);
+        this.removeFriend = this.removeFriend.bind(this);
     }
 
     componentDidMount(){
-        axios.get('/api/user/list').then(res => {
-            console.log(res.data)
+        // axios.get('/api/user/list').then(res => {
+        //     console.log(res.data)
+        //     this.setState({
+        //         users: res.data
+        //     })
+        // })
+
+        axios.get('/api/searchDisplay').then(res => {
+            console.log('front end search display', res.data)
             this.setState({
                 users: res.data
             })
@@ -37,15 +45,39 @@ export default class Search extends Component{
     }
 
     search(){
-        console.log('search clicked')
+        // console.log('search clicked')
+        axios.get('/api/search').then(res => {
+            console.log('search front end reply', res)
+        })
+    }
+
+    searchDisplay(){
+        console.log('search display')
     }
 
     reset(){
         console.log('reset clicked')
     }
 
-    addFriend(){
-        console.log('add friend clicked')
+    addFriend(value){
+        console.log('add friend clicked', value)
+
+        axios.post('/api/searchAddFriend', {id: value}).then(res => {
+            this.setState({
+                users: res.data
+            })
+        })
+    }
+
+    removeFriend(value){
+        console.log('remove friend')
+
+        axios.post('/api/removeFriend', {id: value}).then(res => {
+            console.log('front end remove', res.data)
+            this.setState({
+                users: res.data
+            })
+        })
     }
 
     render(){
@@ -60,10 +92,20 @@ export default class Search extends Component{
                         <div><b>{current.first}</b></div>
                         <div><b>{current.last}</b></div>
                     </div>
+                    
                     <div className="search-user-right">
-                        <div className="add-friend">
-                            <button onClick={this.addFriend}>Add Friend</button>
+                    {
+                        current.friendship == true ?
+                        <div className="remove-friend">
+                            <button onClick={() => {this.removeFriend(current.id)}}>Remove Friend</button>
                         </div>
+                        :
+
+                        <div className="add-friend">
+                            <button onClick={() => {this.addFriend(current.id)}}>Add Friend</button>
+                        </div>
+                    }
+
                     </div>
                 </div>
             )

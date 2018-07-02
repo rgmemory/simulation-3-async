@@ -49,7 +49,19 @@ export default class Dashboard extends Component{
             sort: value
         })
 
-        
+        let userValue = this.state.user[value];
+
+        var filteredUsers = this.state.users.filter(current => {
+            console.log('current[value]', current[value]);
+            console.log('uservalue', userValue)
+            return (current[value] == userValue);
+        })
+
+        console.log('filteredusers', filteredUsers)
+
+        this.setState({
+            users: filteredUsers
+        })
 
         console.log('users are', this.state.users)
         console.log('user is', this.state.user[value])
@@ -133,11 +145,10 @@ export default class Dashboard extends Component{
                             </div>
                         </div>
                         
-                        
                         {
-                            {dashboardUsers} === [] ?
+                            this.state.users.length == 0 ?
 
-                            <div>No recommendations</div>
+                            <div className="dashboard-no-recommendations"><p>No recommendations</p></div>
                             :
                             <div>{dashboardUsers}</div>
                         }
