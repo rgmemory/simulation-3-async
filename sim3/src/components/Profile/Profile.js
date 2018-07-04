@@ -186,11 +186,11 @@ export default class Profile extends Component{
                         <div className="profile-inner-bottom-right">
                             <div>Hobby</div>
                             <select name="hobby" value={this.state.hobby} onChange={e => this.handleHobby(e.target.value)}>
-                                <option value='reading'>Reading</option>
-                                <option value='biking'>Biking</option>
-                                <option value='movies'>Movies</option>
-                                <option value='video Games'>Video Games</option>
-                                <option value='instruments'>Instruments</option>
+                                <option value='Reading'>Reading</option>
+                                <option value='Biking'>Biking</option>
+                                <option value='Movies'>Movies</option>
+                                <option value='Video Games'>Video Games</option>
+                                <option value='Instruments'>Instruments</option>
                             </select>
 
 

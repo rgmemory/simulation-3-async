@@ -80,34 +80,43 @@ module.exports = {
     removeFriend: function(req, res){
         console.log('backend remove', req.body)
 
-        req.app.get('db').remove_friend([req.user[0].id, req.body.id]).then(users => {
-            console.log(users, 'backend users list')
-            req.app.get('db').get_users().then(users =>{
-                req.app.get('db').dashboard_users([req.user[0].id]).then(notFriends => {
-                    
-                    for(var i = 0; i < users.length; i++){
-                        for(var j = 0; j < notFriends.length; j++){
-                            users[i].friendship = true;
-                            if(users[i].id == notFriends[j].id){
-                                users[i].friendship = false;
-                                break;
-                            }
-                        }                        
-                    }
-                    res.send(users)
-                })
-            })
+
+        req.app.get('db').remove_friend([req.user[0].id, req.body.id]).then(friends => {
+            // req.app.get('db').display_pages(offsetNumber).then(users => {
+
+                // req.app.get('db').dashboard_users([req.user[0].id]).then(notFriends => {
+                        
+                //     for(var i = 0; i < users.length; i++){
+                //         for(var j = 0; j < notFriends.length; j++){
+                //             users[i].friendship = true;
+                //             if(users[i].id == notFriends[j].id){
+                //                 users[i].friendship = false;
+                //                 break;
+                //             }
+                //         }                        
+                //     }
+                //     console.log('remove users on the backend', users)
+                //     res.send(users)
+                // })
+                    // res.status(200).send(users);
+            // })
+            res.status(200).send(friends);
         })
+
+
+        
     },
 
     searchAddFriend: function(req, res){
         console.log('backend search add')
 
-        req.app.get('db').add_friend([req.user[0].id, req.body.id]).then(friend => {
+        req.app.get('db').add_friend([req.user[0].id, req.body.id]).then(friends => {
             console.log(friend)
-            req.app.get('db').get_users().then(users =>{
+
+            req.app.get('db').display_pages(offsetNumber).then(users => {
+
                 req.app.get('db').dashboard_users([req.user[0].id]).then(notFriends => {
-                    
+                        
                     for(var i = 0; i < users.length; i++){
                         for(var j = 0; j < notFriends.length; j++){
                             users[i].friendship = true;
@@ -117,9 +126,73 @@ module.exports = {
                             }
                         }                        
                     }
+                    // console.log('add users on the backend', users)
+
                     res.send(users)
                 })
+                    res.status(200).send(users);
             })
+            res.status(200).send(friends)
+        })
+    },
+
+    search: function(req, res){
+        let {firstOrLast, name} = req.body
+        console.log('search', req.body.firstOrLast, req.body.name)
+
+        if(firstOrLast === 'last'){
+            console.log('last')
+            req.app.get('db').get_last(name).then(reply => {
+                console.log('last reply', reply)
+                res.status(200).send(reply)
+            })
+        }else{
+            console.log('first')
+            req.app.get('db').get_first(name).then(reply => {
+                console.log('first reply', reply)
+                res.status(200).send(reply)
+            })
+        }
+
+        
+
+    },
+
+    displaypages: function(req, res){
+        console.log('page number', req.body.page)
+        
+        let offsetNumber = (req.body.page - 1) * 8;
+        console.log('offset', offsetNumber)
+
+        req.app.get('db').display_pages(offsetNumber).then(users => {
+
+            req.app.get('db').dashboard_users([req.user[0].id]).then(notFriends => {
+                // console.log('notfriends', notFriends)
+                    
+                for(var i = 0; i < users.length; i++){
+                    for(var j = 0; j < notFriends.length; j++){
+                        users[i].friendship = true;
+                        if(users[i].id == notFriends[j].id){
+                            users[i].friendship = false;
+                            break;
+                        }
+                    }                        
+                }
+                // res.send(users)
+                // console.log('users', notFriends)
+            })
+                
+            // console.log('users', users)
+            res.status(200).send(users);
+        })
+    },
+
+    numberusers: function(req, res){
+        console.log('backend numberusers')
+        req.app.get('db').number_users().then(count => {
+            console.log('count', count[0]);
+
+            res.status(200).send(count[0])
         })
     }
 }

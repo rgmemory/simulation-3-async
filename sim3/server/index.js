@@ -113,72 +113,11 @@ app.post('/api/removeFriend', controller.removeFriend)
 
 app.get('/api/searchDisplay', controller.searchDisplay)
 
+app.post('/api/search', controller.search)
 
+app.post('/api/displaypages', controller.displaypages)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//auth0 authentication
-// app.get('/api/auth/login', controller.test)
-
-//set the information on the session
-// app.get('/api/auth/setUser', controller.test)
-
-//check for the user object on session
-// app.get('/api/auth/authenticated', controller.test)
-
-//logout
-// app.post('/api/auth/logout', controller.test)
-
-
-
-
-
-
-
-//list all friends
-// app.get('/api/friend/list', controller.test)
-
-//add a friend
-app.post('/api/friend/add', controller.addFriend)
-
-//remove a friend
-// app.post('/api/friend/remove', controller.test)
-
-
-
-
-
-
-
-//update user attributes
-// app.patch('/api/user/patch/:id', controller.test)
-
-//get users
-
-
-
+app.get('/api/numberusers', controller.numberusers)
 
 
 

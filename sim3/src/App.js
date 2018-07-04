@@ -5,8 +5,13 @@ import './App.css';
 import {withRouter} from 'react-router';
 
 
-//how does a select work? Does it take the literal value in value?
-//in order to filter on dahsboard
+///on dashboard why doesn't it consistantly sort stuff why just sometimes and then it stops? I have to click out of dashboard and then back in
+//and it will work, particularly after entering dates
+
+//Dashboard The container for recommended friends should have overflow for scrolling large results.
+
+//when adding or removing friends in search, why does it not reload automatically?
+
 
 class App extends Component {
   render() {

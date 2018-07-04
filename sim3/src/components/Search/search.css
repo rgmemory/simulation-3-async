@@ -8,7 +8,7 @@
 
 
 .search-top{
-    margin-top: 15px;
+    /* margin-top: 15px; */
     height: 80px;
     background-color: white;
     /* border: solid black 1px; */
@@ -25,6 +25,8 @@
 .search-bottom{
     background-color: white;
     height: 500px;
+    display: flex;
+    flex-wrap: wrap;
     /* box-shadow: 1px 1px 1px 1px #ccc; */
     /* border: solid black 1px; */
 }
@@ -33,7 +35,7 @@
     display: flex;
     flex-direction: row;
     /* border: solid green 1px; */
-    width: 50%;
+    width: 47%;
     height: 90px;
     box-shadow: 1px 1px 1px 1px #ccc;
     margin: 9px;
@@ -105,3 +107,73 @@
     display: flex;
     justify-content: space-between
 }
+
+.pagination{
+    /* background-color: #FD8F73; */
+    height: 70px;
+    width: 100%;
+    /* border: solid black 1px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.inner-pagination{
+    height: 50px;
+    width: 80%;
+    /* border: solid black 1px; */
+    background-color: #FD8E72;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-pages{
+    /* border: solid black 1px; */
+    height: 65%;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    /* padding-left: 10px; */
+}
+
+.page-one{
+    /* border: solid black 1px; */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-one button{
+    background-color: black;
+    height: 100%;
+    width: 80px;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    margin: 0 3px;
+}
+
+.pages{
+    /* border: solid black 1px; */
+    display: flex;
+}
+
+.page{
+    height: 100%;
+}
+
+.page button{
+    height: 100%;
+    width: 25px;
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 3px;
+    margin: 0 3px;
+
+}
+
+
+

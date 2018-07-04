@@ -1,13 +1,22 @@
+/* .app{
+    height: 100%;
+    position: fixed;
+} */
+
 
 .background{
     background-color: #F2F2F2;
+    padding-top: 15px;
+    height: 100%;
+    /* position: fixed; */
 }
 
 .center{
-    width: 700px;
+    width: 750px;
     margin: auto;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #F2F2F2;
+    /* position: fixed; */
 }
 
 /* .app{

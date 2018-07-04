@@ -150,7 +150,7 @@ export default class Dashboard extends Component{
 
                             <div className="dashboard-no-recommendations"><p>No recommendations</p></div>
                             :
-                            <div>{dashboardUsers}</div>
+                            <div className="display-users">{dashboardUsers}</div>
                         }
 
                     </div>

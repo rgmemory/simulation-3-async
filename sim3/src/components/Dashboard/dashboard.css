@@ -8,7 +8,7 @@
     height: 100px;
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    /* margin-top: 15px; */
 }
 .dashboard-top-left{
     /* border: solid 1px black; */
@@ -75,7 +75,7 @@
     display: flex;
     flex-direction: row;
     /* border: solid green 1px; */
-    width: 50%;
+    width: 47%;
     height: 90px;
     box-shadow: 1px 1px 1px 1px #ccc;
     margin: 9px;
@@ -143,3 +143,10 @@
     align-items: center;
 }
 
+.display-users{
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: purple; */
+    flex-direction: row;
+    
+}

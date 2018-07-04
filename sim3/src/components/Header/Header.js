@@ -24,7 +24,7 @@ class Header extends Component{
                         <div><Link to="/search"><img src={Magnify}/></Link></div>
                     </div>
 
-                    {/* <div className="current-page">`${this.props.location.pathname} === '/dashboard' ? dashboard`}</div> */}
+                    <div className="current-page">{`${this.props.location.pathname === '/dashboard' ? 'Dashboard' : 'Nope'}`}</div>
 
                     <div className="inner-header-right">
                         {/* <div><Link to="/auth"><button onClick={this.logout}>Logout</button></Link></div> */}
