@@ -15,8 +15,9 @@ export default class Search extends Component{
             value: 2,
             count: null,
             buttons: [],
-            firstOrLast: ''
-            // pageNumber: 1;
+            firstOrLast: '',
+            displayUsers: [],
+            pageNumber: 1
         }
 
         this.updateSearch = this.updateSearch.bind(this);
@@ -28,35 +29,28 @@ export default class Search extends Component{
         this.firstOrLast = this.firstOrLast.bind(this);
     }
 
-    componentDidMount(){           
+    componentDidMount(){      
+        axios.get('/api/searchDisplay').then(res => {
+            let tempDisplayArray = [];
 
-        //load the buttons
-        axios.get('/api/numberusers').then(res => {
-            // console.log('front end users number', res.data.count)
-            this.setState({
-                count: res.data.count
-            })
-            // console.log('this.state.count', this.state.count)
-            let numberOfButtons = Math.ceil(this.state.count / 8);
-            // console.log('number of buttons', numberOfButtons)
+            for(let i = 0; i < 8; i++){
+                tempDisplayArray.push(res.data[i])
+            }
+            
+            let numberOfButtons = Math.ceil(res.data.length / 8);
+
             let buttons = [];
+
             for(let i = 2; i < numberOfButtons + 1; i++ ){
                 buttons.push(i)
             }
+
             this.setState({
-                buttons: buttons
-            })
-            console.log('buttons', this.state.buttons)
-        })
-        
-        //load the users
-        axios.post('/api/displaypages', {page: 1}).then(res => {
-            console.log('front end display page', res.data)
-            this.setState({
-                users: res.data
+                buttons: buttons,
+                users: res.data,
+                displayUsers: tempDisplayArray
             })
         })
-        
     }
     
     //updates state after the value has been input
@@ -76,16 +70,84 @@ export default class Search extends Component{
     }
     
     //clicking the search button
+    /////////////////still working
     search(){
         console.log('search clicked')
         axios.post('/api/search', {firstOrLast: this.state.firstOrLast, name: this.state.search}).then(res => {
-            console.log('search front end reply', res)
+            console.log('search front end reply', res.data)
+
+            this.setState({
+                users: res.data
+            })
+
+
+            // let tempDisplayArray = [];
+
+            // for(let i = 0; i < 8; i++){
+            //     tempDisplayArray.push(res.data[i])
+            // }
+
+            // console.log('temparray', tempDisplayArray)
+            
+            let numberOfButtons = Math.ceil(res.data.length / 8);
+
+            let buttons = [];
+
+            for(let i = 2; i < numberOfButtons + 1; i++ ){
+                buttons.push(i)
+            }
+
+            
+            let tempDisplayArray = [];
+            
+            for(let i = 0; i < 8; i++){
+                tempDisplayArray.push(res.data[i])
+            }
+            
+            console.log('temp display', tempDisplayArray)
+            
+            this.setState({
+                buttons: buttons,
+                users: res.data
+                // displayUsers: tempDisplayArray
+            })
+            
+
+            // console.log('front end users', this.state.displayUsers)
+            
         })
+
+        // })
     }
 
     //clicking the reset button
+
+    //I just patsted stuff it I'm not sure if it works
     reset(){
         console.log('reset clicked')
+
+
+        axios.get('/api/searchDisplay').then(res => {
+            let tempDisplayArray = [];
+
+            for(let i = 0; i < 8; i++){
+                tempDisplayArray.push(res.data[i])
+            }
+            
+            let numberOfButtons = Math.ceil(res.data.length / 8);
+
+            let buttons = [];
+
+            for(let i = 2; i < numberOfButtons + 1; i++ ){
+                buttons.push(i)
+            }
+
+            this.setState({
+                buttons: buttons,
+                users: res.data,
+                displayUsers: tempDisplayArray
+            })
+        })
     }
 
     //add a friend
@@ -113,12 +175,25 @@ export default class Search extends Component{
 
     //click on the individual page and display the information
     displayPage(value){
-        console.log('display page clicked', value)
-        axios.post('/api/displaypages', {page: value}).then(res => {
-            console.log('front end display page', res.data)
-            this.setState({
-                users: res.data
-            })
+        console.log('display page clicked', value, 'users are', this.state.users)
+
+        console.log('first', value)
+
+        let tempArray = [];
+
+        for(var i = ((value - 1)  * 8); i < (value * 8); i++){
+            if(i < this.state.users.length){
+                console.log(i);
+                tempArray.push(this.state.users[i]);
+                console.log('temparray', tempArray)
+            }
+        }
+
+        console.log('final temp array', tempArray)
+
+        this.setState({
+            displayUsers: tempArray
+            
         })
     }
 
@@ -132,7 +207,7 @@ export default class Search extends Component{
             )
         })
 
-        let displayUsers = this.state.users.map((current, index) => {
+        let displayUsers = this.state.displayUsers.map((current, index) => {
             return(
                 <div key={current + index}className="search-user">
                     <div className="search-user-left">

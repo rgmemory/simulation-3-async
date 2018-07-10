@@ -12,6 +12,8 @@ import {withRouter} from 'react-router';
 
 //when adding or removing friends in search, why does it not reload automatically?
 
+//how to display the header title? //do I use conditional rendering?
+
 
 class App extends Component {
   render() {

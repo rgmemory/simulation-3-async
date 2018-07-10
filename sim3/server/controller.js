@@ -1,7 +1,5 @@
 module.exports = {
-    test: function(req, res){
-        console.log('test works')
-    },
+   
 
     addFriend: function(req, res){
         console.log('backend addfriend works', req.body)
@@ -82,24 +80,7 @@ module.exports = {
 
 
         req.app.get('db').remove_friend([req.user[0].id, req.body.id]).then(friends => {
-            // req.app.get('db').display_pages(offsetNumber).then(users => {
-
-                // req.app.get('db').dashboard_users([req.user[0].id]).then(notFriends => {
-                        
-                //     for(var i = 0; i < users.length; i++){
-                //         for(var j = 0; j < notFriends.length; j++){
-                //             users[i].friendship = true;
-                //             if(users[i].id == notFriends[j].id){
-                //                 users[i].friendship = false;
-                //                 break;
-                //             }
-                //         }                        
-                //     }
-                //     console.log('remove users on the backend', users)
-                //     res.send(users)
-                // })
-                    // res.status(200).send(users);
-            // })
+            console.log(friends)
             res.status(200).send(friends);
         })
 
@@ -111,27 +92,7 @@ module.exports = {
         console.log('backend search add')
 
         req.app.get('db').add_friend([req.user[0].id, req.body.id]).then(friends => {
-            console.log(friend)
-
-            req.app.get('db').display_pages(offsetNumber).then(users => {
-
-                req.app.get('db').dashboard_users([req.user[0].id]).then(notFriends => {
-                        
-                    for(var i = 0; i < users.length; i++){
-                        for(var j = 0; j < notFriends.length; j++){
-                            users[i].friendship = true;
-                            if(users[i].id == notFriends[j].id){
-                                users[i].friendship = false;
-                                break;
-                            }
-                        }                        
-                    }
-                    // console.log('add users on the backend', users)
-
-                    res.send(users)
-                })
-                    res.status(200).send(users);
-            })
+            console.log(friends)
             res.status(200).send(friends)
         })
     },
@@ -193,6 +154,14 @@ module.exports = {
             console.log('count', count[0]);
 
             res.status(200).send(count[0])
+        })
+    },
+
+    getsearchusers: function(req, res){
+        console.log('backend gesearchusers')
+        req.app.get('db').get_search_users().then(users => {
+            // console.log('users', users)
+            res.status(200).send(users);
         })
     }
 }

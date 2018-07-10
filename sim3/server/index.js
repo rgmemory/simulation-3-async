@@ -123,6 +123,16 @@ app.get('/api/numberusers', controller.numberusers)
 
 
 
+
+
+
+
+// app.get('/api/getsearchusers', controller.getsearchusers)
+
+
+
+
+
 ///get auth0 setup and also get routing setup
 app.listen(3005, function(){
     console.log('listening on port 3005')
