@@ -1,40 +1,29 @@
 .search{
     background-color: #F2F2F2;
     box-shadow: 1px 1px 1px 1px #ccc;
-
-
 }
 
-
-
 .search-top{
-    /* margin-top: 15px; */
     height: 80px;
     background-color: white;
-    /* border: solid black 1px; */
     display: flex;
-    /* justify-content: center; */
     align-items: center;
-    /* padding-right: 20px; */
-    /* box-shadow: 1px 1px 1px 1px #ccc; */
 }
 
 .search-top div{
     margin-left: 10px;
 }
+
 .search-bottom{
     background-color: white;
     height: 500px;
     display: flex;
     flex-wrap: wrap;
-    /* box-shadow: 1px 1px 1px 1px #ccc; */
-    /* border: solid black 1px; */
 }
 
 .search-user{
     display: flex;
     flex-direction: row;
-    /* border: solid green 1px; */
     width: 47%;
     height: 90px;
     box-shadow: 1px 1px 1px 1px #ccc;
@@ -43,19 +32,15 @@
 }
 
 .search-user-left{
-    /* border: solid red 1px; */
-    /* border: solid black 1px; */
     height: 100%;
     width: 100px;
 }
 .search-user-left img{
-    /* border: solid black 2px; */
     height: 100%;
     width: 100px;
 }
 
 .search-user-center{
-    /* border: solid green 2px; */
     height: 100%;
     width: 100px;
     flex-direction: column;
@@ -63,14 +48,7 @@
     justify-content: center;
 }
 
-/* .search-user-middle{
-    border: solid black 1px;
-    height: 100%;
-    width: 100px;
-} */
-
 .search-user-right{
-    /* border: solid pink 2px; */
     height: 100%;
     width: 100px;
     display: flex;
@@ -103,16 +81,13 @@
 }
 
 .search-recommended{
-    /* border: solid pink 3px; */
     display: flex;
     justify-content: space-between
 }
 
 .pagination{
-    /* background-color: #FD8F73; */
     height: 70px;
     width: 100%;
-    /* border: solid black 1px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,7 +97,6 @@
 .inner-pagination{
     height: 50px;
     width: 80%;
-    /* border: solid black 1px; */
     background-color: #FD8E72;
     display: flex;
     justify-content: center;
@@ -130,16 +104,13 @@
 }
 
 .pagination-pages{
-    /* border: solid black 1px; */
     height: 65%;
     width: 60%;
     display: flex;
     justify-content: center;
-    /* padding-left: 10px; */
 }
 
 .page-one{
-    /* border: solid black 1px; */
     height: 100%;
     display: flex;
     align-items: center;
@@ -157,7 +128,6 @@
 }
 
 .pages{
-    /* border: solid black 1px; */
     display: flex;
 }
 
@@ -172,7 +142,6 @@
     color: black;
     border-radius: 3px;
     margin: 0 3px;
-
 }
 
 

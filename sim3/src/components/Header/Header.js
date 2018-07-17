@@ -27,7 +27,6 @@ class Header extends Component{
                     <div className="current-page">{`${this.props.location.pathname === '/dashboard' ? 'Dashboard' : 'Nope'}`}</div>
 
                     <div className="inner-header-right">
-                        {/* <div><Link to="/auth"><button onClick={this.logout}>Logout</button></Link></div> */}
                         <a href={process.env.REACT_APP_LOGOUT}>LOGOUT</a>
                     </div>
                 </div>

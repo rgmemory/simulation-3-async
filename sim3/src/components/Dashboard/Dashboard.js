@@ -20,7 +20,6 @@ export default class Dashboard extends Component{
     
     componentDidMount(){
         axios.get('/api/getDashboard').then(res => {
-            console.log(res.data, 'response')
             this.setState({
                 users: res.data
             })            
@@ -34,7 +33,6 @@ export default class Dashboard extends Component{
     }
     
     addFriend(value){
-        console.log('add clicked')
         axios.post('/api/addFriend', {id: value}).then(res => {
             this.setState({
                 users: res.data
@@ -52,8 +50,6 @@ export default class Dashboard extends Component{
         let userValue = this.state.user[value];
 
         var filteredUsers = this.state.users.filter(current => {
-            console.log('current[value]', current[value]);
-            console.log('uservalue', userValue)
             return (current[value] == userValue);
         })
 
@@ -65,10 +61,6 @@ export default class Dashboard extends Component{
 
         console.log('users are', this.state.users)
         console.log('user is', this.state.user[value])
-
-        // axios.post('/api/dashboardSort', {sort: value}).then(res =>
-        //     console.log(res, 'res')
-        // )
     }
     
     render(){

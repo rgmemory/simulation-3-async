@@ -15,7 +15,7 @@ export default class Search extends Component{
             value: 2,
             count: null,
             buttons: [],
-            firstOrLast: '',
+            firstOrLast: 'first',
             displayUsers: [],
             pageNumber: 1
         }
@@ -30,7 +30,9 @@ export default class Search extends Component{
     }
 
     componentDidMount(){      
+        ////why isn't this automatically updating? Why do I need to refresh?
         axios.get('/api/searchDisplay').then(res => {
+            console.log('search did mount', res.data)
             let tempDisplayArray = [];
 
             for(let i = 0; i < 8; i++){
@@ -47,7 +49,7 @@ export default class Search extends Component{
 
             this.setState({
                 buttons: buttons,
-                users: res.data,
+                // users: res.data,
                 displayUsers: tempDisplayArray
             })
         })
@@ -55,7 +57,7 @@ export default class Search extends Component{
     
     //updates state after the value has been input
     updateSearch(value){
-        console.log(value);
+        // console.log(value);
         this.setState({
             search: value
         })
@@ -72,60 +74,87 @@ export default class Search extends Component{
     //clicking the search button
     /////////////////still working
     search(){
-        console.log('search clicked')
-        axios.post('/api/search', {firstOrLast: this.state.firstOrLast, name: this.state.search}).then(res => {
-            console.log('search front end reply', res.data)
+            axios.get('/api/searchDisplay').then(res => {
+                console.log('search clicked', res.data, this.state.firstOrLast, this.state.search)
 
-            this.setState({
-                users: res.data
+                let filterArray = [];
+
+                if(this.state.firstOrLast == 'first'){
+                    for(let i = 0; i < res.data.length; i++){
+                        if(res.data[i].first == this.state.search){
+                            console.log(res.data[i], 'info')
+                            filterArray.push(res.data[i])
+                        }
+                    }
+                }else{
+                    for(let i = 0; i < res.data.length; i++){
+                        if(res.data[i].last == this.state.search){
+                            console.log(res.data[i], 'info')
+                            filterArray.push(res.data[i])
+                        }
+                    }
+                }
+
+                
+                if(filterArray.length >=8){
+
+                    let tempDisplayArray = [];
+                    
+                    for(let i = 0; i < 8; i++){
+                        tempDisplayArray.push(filterArray[i])
+                    }
+                    
+                    filterArray = tempDisplayArray;
+                    
+                    console.log('over 8', filterArray.length)
+
+                    let numberOfButtons = Math.ceil(filterArray.length / 8);
+                    console.log('numberOfButtons', numberOfButtons)
+    
+                    let buttons = [];
+        
+                    for(let i = 2; i < numberOfButtons + 1; i++ ){
+                        buttons.push(i)
+                    }
+
+                    this.setState({
+                        buttons: buttons,
+                        displayUsers: filterArray
+                    })
+
+                }else{
+                    let numberOfButtons = Math.ceil(filterArray.length / 8);
+                    console.log('numberOfButtons', numberOfButtons)
+                    
+                    
+                    let buttons = [];
+                    console.log('under 8', filterArray.length)
+        
+                    for(let i = 2; i < numberOfButtons + 1; i++ ){
+                        buttons.push(i)
+                    }
+
+                    this.setState({
+                        buttons: buttons,
+                        displayUsers: filterArray
+                    })
+                }
+
+
+                
+                
+    
+                // this.setState({
+                //     buttons: buttons,
+                //     displayUsers: filterArray
+                // })
             })
-
-
-            // let tempDisplayArray = [];
-
-            // for(let i = 0; i < 8; i++){
-            //     tempDisplayArray.push(res.data[i])
-            // }
-
-            // console.log('temparray', tempDisplayArray)
-            
-            let numberOfButtons = Math.ceil(res.data.length / 8);
-
-            let buttons = [];
-
-            for(let i = 2; i < numberOfButtons + 1; i++ ){
-                buttons.push(i)
-            }
-
-            
-            let tempDisplayArray = [];
-            
-            for(let i = 0; i < 8; i++){
-                tempDisplayArray.push(res.data[i])
-            }
-            
-            console.log('temp display', tempDisplayArray)
-            
-            this.setState({
-                buttons: buttons,
-                users: res.data
-                // displayUsers: tempDisplayArray
-            })
-            
-
-            // console.log('front end users', this.state.displayUsers)
-            
-        })
-
-        // })
     }
 
     //clicking the reset button
 
-    //I just patsted stuff it I'm not sure if it works
     reset(){
         console.log('reset clicked')
-
 
         axios.get('/api/searchDisplay').then(res => {
             let tempDisplayArray = [];
@@ -152,23 +181,52 @@ export default class Search extends Component{
 
     //add a friend
     addFriend(value){
-        console.log('add friend clicked', value)
-
         axios.post('/api/searchAddFriend', {id: value}).then(res => {
-            this.setState({
-                users: res.data
+            axios.get('/api/searchDisplay').then(res => {
+                let tempDisplayArray = [];
+    
+                for(let i = 0; i < 8; i++){
+                    tempDisplayArray.push(res.data[i])
+                }
+                
+                let numberOfButtons = Math.ceil(res.data.length / 8);
+    
+                let buttons = [];
+    
+                for(let i = 2; i < numberOfButtons + 1; i++ ){
+                    buttons.push(i)
+                }
+    
+                this.setState({
+                    buttons: buttons,
+                    displayUsers: tempDisplayArray
+                })
             })
         })
     }
 
     //remove a friend
     removeFriend(value){
-        console.log('remove friend')
-
         axios.post('/api/removeFriend', {id: value}).then(res => {
-            console.log('front end remove', res.data)
-            this.setState({
-                users: res.data
+            axios.get('/api/searchDisplay').then(res => {
+                let tempDisplayArray = [];
+    
+                for(let i = 0; i < 8; i++){
+                    tempDisplayArray.push(res.data[i])
+                }
+                
+                let numberOfButtons = Math.ceil(res.data.length / 8);
+    
+                let buttons = [];
+    
+                for(let i = 2; i < numberOfButtons + 1; i++ ){
+                    buttons.push(i)
+                }
+    
+                this.setState({
+                    buttons: buttons,
+                    displayUsers: tempDisplayArray
+                })
             })
         })
     }
@@ -176,7 +234,6 @@ export default class Search extends Component{
     //click on the individual page and display the information
     displayPage(value){
         console.log('display page clicked', value, 'users are', this.state.users)
-
         console.log('first', value)
 
         let tempArray = [];
@@ -188,7 +245,6 @@ export default class Search extends Component{
                 console.log('temparray', tempArray)
             }
         }
-
         console.log('final temp array', tempArray)
 
         this.setState({
@@ -201,7 +257,7 @@ export default class Search extends Component{
 
         let page = this.state.buttons.map((current, index) => {
             return(
-                <div className="page">
+                <div className="page" key={current + index}>
                     <button onClick={() => {this.displayPage(current)}}>{current}</button>
                 </div>
             )

@@ -47,17 +47,12 @@ passport.use(new Auth0Strategy({
     callbackURL: CALLBACK_URL,
     scope: 'openid profile email'
 }, function(accessToken, refreshToken, extraParams, profile, done){
-    // console.log(profile);
     app.get('db').check_user([profile.id]).then(user => {
         if(user[0]){      
-            // console.log('user already there')      
             done(null, user[0])
         }else{
-            // console.log('user not there')
             app.get('db').register_user([profile.id, profile.name.givenName, profile.name.familyName, `https://robohash.org/me/${profile.id}`]).then(user => {
-                // console.log("user", user[0])
                 done(null, user[0])
-                
             }) 
         }
     })    
@@ -65,12 +60,10 @@ passport.use(new Auth0Strategy({
 
 //create the cookie here
 passport.serializeUser(function(user, done){
-    // console.log('serialize', user)
     done(null, user.id)
 })
 
 passport.deserializeUser(function(id, done){  
-    // console.log('deserialize', id)
     app.get('db').read_user([id]).then(user => {
         done(null, user); 
     })
@@ -84,9 +77,7 @@ app.get('/login', passport.authenticate('auth0', {
 
 app.get('/auth/me', function(req, res){
     if(req.user){
-        // req.app.get('db').get_all_data().then(user => {
             res.status(200).send(req.user)
-        // })
     }else{
         res.status(401).send('nice try sucka')
     }
@@ -95,9 +86,6 @@ app.get('/auth/me', function(req, res){
 app.get('/api/auth/logout', controller.logout)
 
 app.post('/api/dashboardSort', controller.dashboardSort)
-
-
-
 
 app.get('/api/getDashboard', controller.getDashboard)
 
@@ -118,18 +106,6 @@ app.post('/api/search', controller.search)
 app.post('/api/displaypages', controller.displaypages)
 
 app.get('/api/numberusers', controller.numberusers)
-
-
-
-
-
-
-
-
-
-// app.get('/api/getsearchusers', controller.getsearchusers)
-
-
 
 
 

@@ -36,14 +36,11 @@ export default class Profile extends Component{
     componentDidMount(){
       
         axios.get('api/getDashUser').then(user => {
-            console.log('user', user)
 
             let {first, last, gender, hair, eye, hobby, day, month, year, image} = user.data;
             this.setState({
                 first, last, gender, hair, eye, hobby, day, month, year, image
             })
-            console.log('this.state.first', this.state.first)
-            console.log('this.state.image', this.state.image)
         })
     }
 

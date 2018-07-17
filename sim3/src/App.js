@@ -14,15 +14,10 @@ import {withRouter} from 'react-router';
 
 //how to display the header title? //do I use conditional rendering?
 
-
 class App extends Component {
   render() {
-    // console.log(this.props)
     return (
-      <div className="App">
-       
-          {/* <div className={`${this.props.location.pathname === '/' ? 'auth-background' : 'background'}`}> */}
-          
+      <div className="App">          
             {
               this.props.location.pathname === '/' ? 
 
