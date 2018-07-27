@@ -47,6 +47,7 @@ module.exports = {
     },
 
     searchDisplay: function(req, res){
+        ///////here is where I want to limit the number of users from SQL then the loop functions as normal
         req.app.get('db').get_users().then(users => {
             req.app.get('db').dashboard_users([req.user[0].id]).then(notFriends => {
                 

@@ -14,6 +14,13 @@ class Header extends Component{
 
 
     render(){
+
+        let location = ''
+
+        if(this.props.location.pathname === '/dashboard'){
+            location = 'dashboard'
+        }
+
         return(
             <div className="header">
                 <div className="inner-header">
@@ -24,7 +31,12 @@ class Header extends Component{
                         <div><Link to="/search"><img src={Magnify}/></Link></div>
                     </div>
 
-                    <div className="current-page">{`${this.props.location.pathname === '/dashboard' ? 'Dashboard' : 'Nope'}`}</div>
+                    {
+
+                    }
+
+                    {/* <div className="current-page">{`${this.props.location.pathname === '/dashboard' ? 'Dashboard' : 'Nope'}`}</div> */}
+                    <div className="current-page">{location}</div>
 
                     <div className="inner-header-right">
                         <a href={process.env.REACT_APP_LOGOUT}>LOGOUT</a>

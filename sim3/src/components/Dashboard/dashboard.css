@@ -133,4 +133,6 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    height: 500px;
+    overflow: scroll;
 }

@@ -64,6 +64,9 @@ export default class Dashboard extends Component{
     }
     
     render(){
+
+
+        //////filtered users goes here so that it doesn't impact state
         
         let dashboardUsers = this.state.users.map((current, index) => {
             return(
