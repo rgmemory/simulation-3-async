@@ -14,6 +14,7 @@ export default class Auth extends Component{
             <div className="auth">
                 <div className="auth-login">
                     <div className="auth-login-logo">
+                    {/* 54J	 */}
                         <div><img src={auth} /></div>
                     </div>
                     <div className="auth-login-title">

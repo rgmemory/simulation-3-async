@@ -2,6 +2,7 @@
     height: 80px;
     color: white;
     box-sizing: border-box;
+    /* 23F	 */
     background-image: linear-gradient(97deg, #ff7a6e, #ff9770); box-shadow: 0 10px 20px 0
     rgba(0,0,0,0.1), 0 6px 6px 0 rgba(0,0,0,0.2);
 }
@@ -12,6 +13,7 @@
     margin: auto;
     display: flex;
     justify-content: space-between;
+    /* 27D	 */
     align-items: center;
 }
 
@@ -21,17 +23,22 @@
     border: none;
     height: 100%;
     width: 80px;
+    /* 23D-2 */
     color: white;
 }
 
 .inner-header-left{
     height: 100%;
+    /* 27G */
     display: flex;
     align-items: center;
     display: flex;
     justify-content: space-between;
     width: 150px;
+    /* 23D-3 */
     font-size: 25px;
+    /* 23D-1	 */
+    font-weight: 700;
 }
 
 .inner-header-left img{

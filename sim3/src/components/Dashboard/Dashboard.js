@@ -72,6 +72,7 @@ export default class Dashboard extends Component{
             return(
                 <div key={current + index} className="dashboard-user">
                     <div className="dashboard-user-left">
+                    {/* 54G	 */}
                         <img src={current.image} />
                     </div>
                     <div className="dashboard-user-center">

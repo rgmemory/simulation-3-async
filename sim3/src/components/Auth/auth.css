@@ -18,6 +18,7 @@
 .auth-login-logo{
     height: 50%;
     display: flex;
+    /* 27C	 */
     justify-content: center;
     align-items: center;
 }
@@ -44,6 +45,7 @@
 }
 
 .auth-login-button button{
+    /* 23E */
     background-color: #3F3D3A;
     height: 40px;
     width: 250px;
